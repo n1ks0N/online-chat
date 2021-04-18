@@ -154,10 +154,11 @@ footer {
   border-bottom-left-radius: 5px;
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
-  margin: 25px;
+  margin: 10px 25px;
   padding: 10px 15px;
   width: max-content;
   min-width: 400px;
+  max-width: 800px;
 }
 .chat__header {
   font-size: 16px;
@@ -165,15 +166,24 @@ footer {
 }
 .chat__text {
   font-size: 18px;
+  margin-top: 15px;
+  line-height: 20px;
 }
 .chat__form {
   display: flex;
   flex-direction: row;
   align-items: flex-end;
   justify-content: space-between;
-  padding: 0 25px;
+  padding: 16px 25px;
 }
 .chat__form__textarea {
   width: 600px;
   margin-bottom: 10px;
+}
+
+.form-group__info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }

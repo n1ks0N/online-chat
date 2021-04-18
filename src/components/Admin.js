@@ -102,7 +102,7 @@ const Admin = () => {
 	};
 
 	const send = () => {
-		let req = new XMLHttpRequest();	
+		let req = new XMLHttpRequest();
 		req.open('PUT', urlAd, true);
 		req.setRequestHeader('Content-Type', 'application/json');
 		req.setRequestHeader('X-Master-Key', keyAd);
