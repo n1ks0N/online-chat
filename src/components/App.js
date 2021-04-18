@@ -64,7 +64,7 @@ by https://github.com/n1ks0N
   }, []);
   useEffect(() => { // прокрутка окна чата, при добавлении нового сообщения
     document.querySelector('.chat__content').scrollTop = document.querySelector('.chat__content').scrollHeight;
-  }, [document.querySelectorAll('.chat__message').length, document.querySelector('.chat__content').scrollHeight])
+  }, [data])
   const sendMessage = () => {
     let allow = true;
     setData((prev) => {
