@@ -1,10 +1,4 @@
-import React, {
-	useRef,
-	useState,
-	useLayoutEffect,
-	useEffect,
-	useMemo
-} from 'react';
+import React, { useRef, useState, useLayoutEffect, useEffect } from 'react';
 import { urlAd, keyAd } from '../constants/api.json';
 import InputText from '../elements/InputText';
 import './App.css';
@@ -62,11 +56,7 @@ Powered on ReactJS
 by https://github.com/n1ks0N
 			`);
 	}, []);
-	useEffect(() => {
-		// прокрутка окна чата, при добавлении нового сообщения
-		document.querySelector('.chat__content').scrollTop = document.querySelector('.chat__content').scrollHeight;
-    console.log(document.querySelector('.chat__content').scrollHeight)
-	}, [send]);
+
 	const sendMessage = () => {
 		let allow = true;
 		setData((prev) => {
@@ -109,7 +99,10 @@ by https://github.com/n1ks0N
 		setSend(true);
 	};
 	useEffect(() => {
+		const element = document.querySelector('.chat__content');
+		element.scrollTop = element.scrollHeight; // прокрутка окна чата при добавлении нового сообщения
 		if (send) {
+			// отправка новых данных
 			let req = new XMLHttpRequest();
 			req.open('PUT', urlAd, true);
 			req.setRequestHeader('Content-Type', 'application/json');

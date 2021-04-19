@@ -14,8 +14,12 @@ ReactDOM.render(
 			<header>
 				<h3>Бесплатный рекламный онлайн-чат</h3>
 				<menu>
+					<b>Добавить рекламу</b>
 					<Link to="/">
 						<li>Онлайн-чат</li>
+					</Link>
+					<Link to="/sites">
+						<li>Сайты</li>
 					</Link>
 					<Link to="/links">
 						<li>Ссылки</li>
