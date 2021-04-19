@@ -4,7 +4,7 @@ import InputText from '../../elements/InputText';
 import '../App.css';
 import './direction.css';
 
-const Links = () => {
+const Banner468 = () => {
 	const [send, setSend] = useState(false);
 	const [count, setCount] = useState(7);
 
@@ -63,7 +63,7 @@ const Links = () => {
 		setData((prev) => {
 			if (allow) {
 				allow = false; // eslint-disable-next-line
-				let arr = prev['directions']['links'];
+				let arr = prev['directions']['banner468'];
 				if (arr.length >= 20) {
 					arr.splice(0, 1);
 				}
@@ -77,7 +77,7 @@ const Links = () => {
 					...prev, // eslint-disable-next-line
 					['directions']: { 
 						...prev['directions'], // eslint-disable-next-line
-						['links']: arr
+						['banner468']: arr
 					}
 				};
 			} else {
@@ -108,6 +108,7 @@ const Links = () => {
     document.querySelector('#link1').disabled =
 			count === 0 ? false : true;
 	}, [count]);
+  console.log(JSON.stringify(data))
 	return (
 		<>
 			<div className="bg"></div>
@@ -142,9 +143,9 @@ const Links = () => {
 					</div>
 				</div>
 				<div className="app">
-					<h1 align="center">Ссылки</h1>
+					<h1 align="center">Баннеры 468x60</h1>
 					<h2 align="center">
-						Вам осталось {count} кликов, чтобы добавить свою ссылку
+						Вам осталось {count} кликов, чтобы добавить свой баннер
 					</h2>
 					<div className="main">
 						<div className="main__form">
@@ -179,7 +180,7 @@ const Links = () => {
 						</div>
 						<div className="links__wrapper">
 							{!!data &&
-								data.directions.links.map((data, i) => (
+								data.directions.banner468.map((data, i) => (
 									<div className="links__wrapper__item" key={i}>
                     <a
 											href={`//${data.link}`}
@@ -190,7 +191,7 @@ const Links = () => {
 											className="links__wrapper__a"
                       rel="noreferrer"
 										>
-											{data.text}
+                      <img />
 										</a>
 										<span>#{++i}</span>
 									</div>
@@ -241,4 +242,4 @@ const Links = () => {
 	);
 };
 
-export default Links;
+export default Banner468;

@@ -5,6 +5,8 @@ import { Route, BrowserRouter, Switch, Link } from 'react-router-dom';
 import App from './components/App';
 import Admin from './components/Admin';
 import Links from './components/direction/Links';
+import Sites from './components/direction/Sites'
+import Banner468 from './components/direction/Banner468';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
@@ -12,12 +14,12 @@ ReactDOM.render(
 	<React.StrictMode>
 		<BrowserRouter>
 			<header>
-				<h3>Бесплатный рекламный онлайн-чат</h3>
+				<h3>Рекламный чат</h3>
 				<menu>
-					<b>Добавить рекламу</b>
 					<Link to="/">
 						<li>Онлайн-чат</li>
 					</Link>
+					<b>Добавить рекламу</b>
 					<Link to="/sites">
 						<li>Сайты</li>
 					</Link>
@@ -37,7 +39,9 @@ ReactDOM.render(
 			</header>
 			<Switch>
 				<Route exact path="/admin" render={() => <Admin />} />
+				<Route path="/sites" render={() => <Sites />} />
 				<Route path="/links" render={() => <Links />} />
+				<Route path="/banner468x60" render={() => <Banner468 />} />
 				<Route path="*" render={() => <App />} />
 			</Switch>
 		</BrowserRouter>

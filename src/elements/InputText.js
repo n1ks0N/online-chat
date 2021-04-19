@@ -11,12 +11,12 @@ const InputText = ({ text, type, value, name, placeholder, change, i }) => {
 	};
 	return (
 		<div>
-			{text && <label htmlFor={name + i}>{text}</label>}
+			{text && <label htmlFor={`${name}${i}`}>{text}</label>}
 			<div className="input-group">
 				<input
 					type={type}
 					className="form-control"
-					id={name + i}
+					id={`${name}${i}`}
 					placeholder={placeholder}
 					ref={inputRef}
 					value={value}

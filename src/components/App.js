@@ -178,7 +178,7 @@ by https://github.com/n1ks0N
 													{data.date.split(' ').splice(0, 5).join(' ')}
 												</span>
 												&nbsp;
-												<span>#{i}</span>
+												<span>#{i++}</span>
 											</div>
 										</div>
 									))}

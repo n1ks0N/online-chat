@@ -4,7 +4,7 @@ import InputText from '../../elements/InputText';
 import '../App.css';
 import './direction.css';
 
-const Links = () => {
+const Sites = () => {
 	const [send, setSend] = useState(false);
 	const [count, setCount] = useState(7);
 
@@ -63,7 +63,7 @@ const Links = () => {
 		setData((prev) => {
 			if (allow) {
 				allow = false; // eslint-disable-next-line
-				let arr = prev['directions']['links'];
+				let arr = prev['directions']['sites'];
 				if (arr.length >= 20) {
 					arr.splice(0, 1);
 				}
@@ -77,7 +77,7 @@ const Links = () => {
 					...prev, // eslint-disable-next-line
 					['directions']: { 
 						...prev['directions'], // eslint-disable-next-line
-						['links']: arr
+						['sites']: arr
 					}
 				};
 			} else {
@@ -108,6 +108,7 @@ const Links = () => {
     document.querySelector('#link1').disabled =
 			count === 0 ? false : true;
 	}, [count]);
+  console.log(JSON.stringify(data))
 	return (
 		<>
 			<div className="bg"></div>
@@ -142,9 +143,9 @@ const Links = () => {
 					</div>
 				</div>
 				<div className="app">
-					<h1 align="center">Ссылки</h1>
+					<h1 align="center">Сайты</h1>
 					<h2 align="center">
-						Вам осталось {count} кликов, чтобы добавить свою ссылку
+						Вам осталось {count} кликов, чтобы добавить свой сайт
 					</h2>
 					<div className="main">
 						<div className="main__form">
@@ -181,6 +182,8 @@ const Links = () => {
 							{!!data &&
 								data.directions.links.map((data, i) => (
 									<div className="links__wrapper__item" key={i}>
+                    <div className="links__wrapper__text">
+										<p className="links__wrapper__a">{data.text}</p>
                     <a
 											href={`//${data.link}`}
 											onClick={() =>
@@ -190,8 +193,9 @@ const Links = () => {
 											className="links__wrapper__a"
                       rel="noreferrer"
 										>
-											{data.text}
+											{data.link}
 										</a>
+                    </div>
 										<span>#{++i}</span>
 									</div>
 								))}
@@ -241,4 +245,4 @@ const Links = () => {
 	);
 };
 
-export default Links;
+export default Sites;
