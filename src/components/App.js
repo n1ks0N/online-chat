@@ -60,7 +60,7 @@ by https://github.com/n1ks0N
 	const sendMessage = () => {
 		let allow = true;
 		setData((prev) => {
-			if (allow) {
+			if (allow && inputMessageValue.length > 0) {
 				allow = false;
 				let arr = prev['directions']['chat'];
 				if (arr.length >= 20) {
@@ -110,7 +110,7 @@ by https://github.com/n1ks0N
 			req.send(JSON.stringify(data));
 			setSend(false);
 		}
-	}, [send]);
+	}, [send, data]);
 	const changeInputs = ({ param, name }) => {
 		switch (name) {
 			case 'name':
@@ -178,7 +178,7 @@ by https://github.com/n1ks0N
 													{data.date.split(' ').splice(0, 5).join(' ')}
 												</span>
 												&nbsp;
-												<span>#{i++}</span>
+												<span>#{++i}</span>
 											</div>
 										</div>
 									))}

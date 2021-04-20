@@ -5,7 +5,7 @@ import { Route, BrowserRouter, Switch, Link } from 'react-router-dom';
 import App from './components/App';
 import Admin from './components/Admin';
 import Links from './components/direction/Links';
-import Sites from './components/direction/Sites'
+import Sites from './components/direction/Sites';
 import Banner468 from './components/direction/Banner468';
 import './index.css';
 import reportWebVitals from './reportWebVitals';

@@ -1,6 +1,6 @@
 import React, { useState, useLayoutEffect, useEffect } from 'react';
-import { urlAd, keyAd } from '../../constants/api.json'; 
-import InputText from '../../elements/InputText'; 
+import { urlAd, keyAd } from '../../constants/api.json';
+import InputText from '../../elements/InputText';
 import '../App.css';
 import './direction.css';
 
@@ -53,15 +53,15 @@ const Sites = () => {
 			case 'link':
 				setInputLinkValue(param);
 				break;
-      default:
-        return
+			default:
+				return;
 		}
 	};
 
 	const sendNewAdd = () => {
 		let allow = true;
 		setData((prev) => {
-			if (allow) {
+			if (allow && inputTextValue.length > 0 && inputLinkValue.length > 0) {
 				allow = false; // eslint-disable-next-line
 				let arr = prev['directions']['sites'];
 				if (arr.length >= 20) {
@@ -75,7 +75,7 @@ const Sites = () => {
 				});
 				return {
 					...prev, // eslint-disable-next-line
-					['directions']: { 
+					['directions']: {
 						...prev['directions'], // eslint-disable-next-line
 						['sites']: arr
 					}
@@ -103,12 +103,9 @@ const Sites = () => {
 		// счётчик
 		document.querySelector('.main__add-btn').disabled =
 			count === 0 ? false : true;
-    document.querySelector('#text0').disabled =
-			count === 0 ? false : true;
-    document.querySelector('#link1').disabled =
-			count === 0 ? false : true;
+		document.querySelector('#text0').disabled = count === 0 ? false : true;
+		document.querySelector('#link1').disabled = count === 0 ? false : true;
 	}, [count]);
-  console.log(JSON.stringify(data))
 	return (
 		<>
 			<div className="bg"></div>
@@ -157,7 +154,8 @@ const Sites = () => {
 									name="text"
 									placeholder="Какой-то текст..."
 									change={changesInput}
-                  i="0"
+									i="0"
+									tag="textarea"
 								/>
 								<InputText
 									text="Ссылка"
@@ -166,7 +164,7 @@ const Sites = () => {
 									name="link"
 									placeholder="https://example.com"
 									change={changesInput}
-                  i="1"
+									i="1"
 								/>
 							</div>
 							<button
@@ -182,20 +180,20 @@ const Sites = () => {
 							{!!data &&
 								data.directions.links.map((data, i) => (
 									<div className="links__wrapper__item" key={i}>
-                    <div className="links__wrapper__text">
-										<p className="links__wrapper__a">{data.text}</p>
-                    <a
-											href={`//${data.link}`}
-											onClick={() =>
-												setCount((prev) => (prev > 0 ? --prev : 0))
-											}
-											target="_blank"
-											className="links__wrapper__a"
-                      rel="noreferrer"
-										>
-											{data.link}
-										</a>
-                    </div>
+										<div className="links__wrapper__text">
+											<p className="links__wrapper__a">{data.text}</p>
+											<a
+												href={`//${data.link}`}
+												onClick={() =>
+													setCount((prev) => (prev > 0 ? --prev : 0))
+												}
+												target="_blank"
+												className="links__wrapper__a"
+												rel="noreferrer"
+											>
+												{data.link}
+											</a>
+										</div>
 										<span>#{++i}</span>
 									</div>
 								))}
