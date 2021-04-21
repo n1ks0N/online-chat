@@ -83,7 +83,8 @@ by https://github.com/n1ks0N
 					message: `${result.join('')}`,
 					date: `${new Date()}`,
 					mail: `${inputMailValue}`,
-					name: `${inputNameValue}`
+					name: `${inputNameValue}`,
+          id: Number(arr[arr.length-1].id) + 1
 				});
 				return {
 					...prev,
@@ -178,7 +179,7 @@ by https://github.com/n1ks0N
 													{data.date.split(' ').splice(0, 5).join(' ')}
 												</span>
 												&nbsp;
-												<span>#{++i}</span>
+												<span>#{data.id}</span>
 											</div>
 										</div>
 									))}
@@ -212,7 +213,7 @@ by https://github.com/n1ks0N
 								</div>
 								<button
 									type="button"
-									className="btn btn-success"
+									className="btn btn-success g-recaptcha"
 									onClick={sendMessage}
 								>
 									Отправить

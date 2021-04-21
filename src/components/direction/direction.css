@@ -7,7 +7,7 @@
 .links__wrapper {
   display: flex;
   width: 100%;
-  flex-direction: column;
+  flex-direction: column-reverse;
   align-items: center;
   justify-content: center;
 }
