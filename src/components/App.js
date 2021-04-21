@@ -84,7 +84,7 @@ by https://github.com/n1ks0N
 					date: `${new Date()}`,
 					mail: `${inputMailValue}`,
 					name: `${inputNameValue}`,
-          id: Number(arr[arr.length-1].id) + 1
+					id: Number(arr[arr.length - 1].id) + 1
 				});
 				return {
 					...prev,
