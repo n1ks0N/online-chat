@@ -65,9 +65,9 @@ const Sites = () => {
 				allow = false; // eslint-disable-next-line
 				let arr = prev['directions']['sites'];
 				if (arr.length >= 20) {
-					arr.splice(0, 1);
+					arr.pop();
 				}
-				arr.push({
+				arr.unshift({
 					text: inputTextValue,
 					link: inputLinkValue.includes('://')
 						? inputLinkValue.split('://')[1]

@@ -7,7 +7,64 @@ const Admin = () => {
 	const [data, setData] = useState('');
 	const logRef = useRef('');
 	const passRef = useRef('');
+	const idRef = useRef('');
 
+	const selectRef = useRef('');
+	const valuesSelect = [
+		{
+			text: 'Онлайн-чат',
+			type: 'chat'
+		},
+		{
+			text: 'Сайты',
+			type: 'sites'
+		},
+		{
+			text: 'Ссылки',
+			type: 'links'
+		},
+		{
+			text: 'Баннеры 468x60',
+			type: 'banner468'
+		},
+		{
+			text: 'Баннеры 200x300',
+			type: 'banner300'
+		},
+		{
+			text: 'Баннеры 200x200',
+			type: 'banner200'
+		}
+	];
+	const delWithId = () => {
+		if (selectRef.current.value === 'chat') {
+			setData((prev) => {
+				const arr = prev['directions']['chat'].filter(
+					(n) => n.id != +/\d+/.exec(idRef.current.value)
+				);
+				return {
+					...prev,
+					['directions']: {
+						...prev['directions'],
+						['chat']: arr
+					}
+				};
+			});
+		} else {
+			setData((prev) => {
+				let arr = prev['directions'][selectRef.current.value].slice();
+				arr.splice(+/\d+/.exec(idRef.current.value) - 1, 1);
+				return {
+					...prev,
+					['directions']: {
+						...prev['directions'],
+						[selectRef.current.value]: arr
+					}
+				};
+			});
+		}
+	};
+	console.log(!!data && data.directions);
 	const login = () => {
 		if (
 			logRef.current.value === 'Aprel16' &&
@@ -337,6 +394,26 @@ const Admin = () => {
 							Добавить
 						</button>
 					</center>
+					<h3 align="center">Удаление</h3>
+					<div style={{ width: '800px', margin: 'auto' }}>
+						<label htmlFor="select">Выберите страницу</label>
+						<select className={`custom-select`} id="select" ref={selectRef}>
+							{valuesSelect.map((data, i) => (
+								<option value={data.type} key={i}>
+									{data.text}
+								</option>
+							))}
+						</select>
+						<label>Напишите id</label>&nbsp;
+						<input type="text" placeholder="5" ref={idRef} />
+						<button
+							type="button"
+							className="btn btn-danger"
+							onClick={delWithId}
+						>
+							Удалить
+						</button>
+					</div>
 					<center>
 						<button
 							type="button"

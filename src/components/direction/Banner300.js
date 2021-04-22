@@ -4,7 +4,7 @@ import InputText from '../../elements/InputText';
 import '../App.css';
 import './direction.css';
 
-const Banner468 = ({ type }) => {
+const Banner300 = ({ type }) => {
 	const [send, setSend] = useState(false);
 	const [count, setCount] = useState(7);
 	const [title, setTitle] = useState('');
@@ -210,7 +210,7 @@ const Banner468 = ({ type }) => {
 						</div>
 						<div className="links__wrapper">
 							{!!data &&
-								data.directions.banner468.map((data, i) => (
+								data.directions[type].map((data, i) => (
 									<div className="links__wrapper__item" key={i}>
 										<a
 											href={`//${data.link}`}
@@ -272,4 +272,4 @@ const Banner468 = ({ type }) => {
 	);
 };
 
-export default Banner468;
+export default Banner300;

@@ -7,6 +7,8 @@ import Admin from './components/Admin';
 import Links from './components/direction/Links';
 import Sites from './components/direction/Sites';
 import Banner468 from './components/direction/Banner468';
+import Banner300 from './components/direction/Banner300';
+import Banner200 from './components/direction/Banner200';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
@@ -41,7 +43,18 @@ ReactDOM.render(
 				<Route exact path="/admin" render={() => <Admin />} />
 				<Route path="/sites" render={() => <Sites />} />
 				<Route path="/links" render={() => <Links />} />
-				<Route path="/banner468x60" render={() => <Banner468 />} />
+				<Route
+					path="/banner468x60"
+					render={() => <Banner468 type="banner468" />}
+				/>
+				<Route
+					path="/banner200x300"
+					render={() => <Banner300 type="banner300" />}
+				/>
+				<Route
+					path="/banner200x200"
+					render={() => <Banner200 type="banner200" />}
+				/>
 				<Route path="*" render={() => <App />} />
 			</Switch>
 		</BrowserRouter>
