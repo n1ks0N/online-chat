@@ -64,7 +64,6 @@ const Admin = () => {
 			});
 		}
 	};
-	console.log(!!data && data.directions);
 	const login = () => {
 		if (
 			logRef.current.value === 'Aprel16' &&
