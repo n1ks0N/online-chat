@@ -25,7 +25,7 @@ const InputText = ({
 				{tag === 'textarea' ? (
 					<textarea
 						type={type}
-						className="form-control"
+						className="form-control textarea_width"
 						id={`${name}${i}`}
 						placeholder={placeholder}
 						ref={inputRef}

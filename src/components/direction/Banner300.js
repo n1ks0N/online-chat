@@ -208,7 +208,7 @@ const Banner300 = ({ type }) => {
 								Добавить
 							</button>
 						</div>
-						<div className="links__wrapper">
+						<div className="banner200__grid">
 							{!!data &&
 								data.directions[type].map((data, i) => (
 									<div className="links__wrapper__item" key={i}>

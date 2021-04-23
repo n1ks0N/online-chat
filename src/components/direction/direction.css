@@ -1,4 +1,4 @@
-textarea {
+.textarea_width {
   width: 800px !important;
 }
 .main__form {
@@ -10,7 +10,8 @@ textarea {
 .links__wrapper {
   display: flex;
   width: 100%;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
 }
@@ -34,6 +35,20 @@ p {
 .banner468 {
   width: 468px;
   height: 60px;
+}
+.banner468__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    ". .";
+  gap: 0px 10px;
+}
+.banner200__grid {
+  display: grid;
+  grid-template-columns: repeat(5, 5fr);
+  grid-template-areas:
+    ". . . . .";
+  gap: 0px 10px;
 }
 .banner300 {
   width: 200px;
