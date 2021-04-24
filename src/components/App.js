@@ -113,7 +113,7 @@ by https://github.com/n1ks0N
       document.querySelector('.g-recaptcha').disabled = true;
       setTimeout(() => {
         document.querySelector('.g-recaptcha').disabled = false;
-      }, [data.directions.timer] || 5000)
+      }, Number(data.directions.timer) || 5000)
 		}
 	}, [send, data]);
 	const changeInputs = ({ param, name }) => {
