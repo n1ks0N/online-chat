@@ -221,7 +221,7 @@ const Sites = () => {
 					<div className="footer__links">
 						{!!data &&
 							data.footer.socials.map((data, i) => (
-								<a key={i} href={data.link} className="footer__link">
+								<a key={i} href={data.link} className="footer__link" target="_blank">
 									{data.text}
 								</a>
 							))}

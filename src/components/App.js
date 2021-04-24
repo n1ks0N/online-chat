@@ -110,6 +110,10 @@ by https://github.com/n1ks0N
 			req.setRequestHeader('X-Master-Key', keyAd);
 			req.send(JSON.stringify(data));
 			setSend(false);
+      document.querySelector('.g-recaptcha').disabled = true;
+      setTimeout(() => {
+        document.querySelector('.g-recaptcha').disabled = false;
+      }, [data.directions.timer] || 5000)
 		}
 	}, [send, data]);
 	const changeInputs = ({ param, name }) => {
@@ -243,7 +247,7 @@ by https://github.com/n1ks0N
 					<div className="footer__links">
 						{!!data &&
 							data.footer.socials.map((data, i) => (
-								<a key={i} href={data.link} className="footer__link">
+								<a key={i} href={data.link} className="footer__link" target="_blank">
 									{data.text}
 								</a>
 							))}

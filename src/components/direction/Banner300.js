@@ -3,8 +3,10 @@ import { urlAd, keyAd } from '../../constants/api.json';
 import InputText from '../../elements/InputText';
 import '../App.css';
 import './direction.css';
+import { fbStorage } from '../../constants/firebase'
 
 const Banner300 = ({ type }) => {
+	const storageRef = fbStorage.storage().ref();
 	const [send, setSend] = useState(false);
 	const [count, setCount] = useState(7);
 	const [title, setTitle] = useState('');
@@ -95,15 +97,27 @@ const Banner300 = ({ type }) => {
 			setSend(true);
 		};
 
-		if (inputFileRef.current.files.length !== 0) {
-			let reader = new FileReader();
-			reader.readAsDataURL(inputFileRef.current.files[0]);
-			reader.onload = () => {
-				createData(reader.result);
-			};
-		} else if (inputTextValue.length !== 0) {
-			createData(inputTextValue);
-		}
+		if (inputLinkValue.length > 0) {
+      if (inputFileRef.current.files.length !== 0) {
+        let reader = new FileReader();
+        reader.readAsDataURL(inputFileRef.current.files[0]);
+        reader.onload = () => {
+          let imageName = '';
+          const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+          for (let j = 0; j < 16; j++) {
+            imageName += alphabet.charAt(
+              Math.floor(Math.random() * alphabet.length)
+            );
+          }
+          const fileRef = storageRef.child(imageName);
+          fileRef.putString(reader.result, 'data_url').then(() => {
+            createData(`https://firebasestorage.googleapis.com/v0/b/banner-redactor.appspot.com/o/${imageName}?alt=media`)
+          })
+        };
+      } else if (inputTextValue.length !== 0) {
+        createData(inputTextValue);
+      }
+    }
 	};
 	useEffect(() => {
 		if (send) {
@@ -250,7 +264,7 @@ const Banner300 = ({ type }) => {
 					<div className="footer__links">
 						{!!data &&
 							data.footer.socials.map((data, i) => (
-								<a key={i} href={data.link} className="footer__link">
+								<a key={i} href={data.link} className="footer__link" target="_blank">
 									{data.text}
 								</a>
 							))}

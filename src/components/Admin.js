@@ -157,12 +157,25 @@ const Admin = () => {
 		});
 	};
 
+	const changeDirections = ({ param }) => {
+		setData((prev) => {
+			return {
+				...prev,
+				['directions']: {
+					...prev['directions'],
+					['timer']: param
+				}
+			}
+		})
+	}
+
 	const send = () => {
 		let req = new XMLHttpRequest();
 		req.open('PUT', urlAd, true);
 		req.setRequestHeader('Content-Type', 'application/json');
 		req.setRequestHeader('X-Master-Key', keyAd);
 		req.send(JSON.stringify(data));
+		console.log(data)
 	};
 	return (
 		<div className="">
@@ -412,6 +425,16 @@ const Admin = () => {
 						>
 							Удалить
 						</button>
+					</div>
+					<h3 align="center">Задержка в чате</h3>
+					<div style={{ width: '800px', margin: 'auto' }}>
+					<InputText 
+						text="Время в секундах"
+						type="number"
+						value={data.directions.timer}
+						change={changeDirections}
+						name="timer"
+					/>
 					</div>
 					<center>
 						<button

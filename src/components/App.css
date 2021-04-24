@@ -84,7 +84,7 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
 }
 .footer__link, .footer__link:hover {
   color: #ff6e3d;
