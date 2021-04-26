@@ -63,7 +63,7 @@ by https://github.com/n1ks0N
 			if (allow && inputMessageValue.length > 0) {
 				allow = false;
 				let arr = prev['directions']['chat'];
-				if (arr.length >= 20) {
+				if (arr.length >= (Number(data.directions.messages) || 20)) {
 					arr.splice(0, 1);
 				}
 				let result = []; // измененное сообщение с готовыми ссылками в чате
@@ -105,15 +105,30 @@ by https://github.com/n1ks0N
 		if (send) {
 			// отправка новых данных
 			let req = new XMLHttpRequest();
-			req.open('PUT', urlAd, true);
-			req.setRequestHeader('Content-Type', 'application/json');
-			req.setRequestHeader('X-Master-Key', keyAd);
-			req.send(JSON.stringify(data));
-			setSend(false);
+      req.onreadystatechange = () => {
+        if (req.readyState == XMLHttpRequest.DONE) {
+          let result = JSON.parse(req.responseText).record;
+          let arr = result['directions']['chat'].slice()
+          if (arr.length >= (Number(data.directions.messages) || 20)) {
+            arr.splice(0, 1);
+          }
+          arr.push(data.directions.chat[data.directions.chat.length - 1]);
+          result.directions.chat = arr;
+          let reqPut = new XMLHttpRequest();
+          reqPut.open('PUT', urlAd, true);
+          reqPut.setRequestHeader('Content-Type', 'application/json');
+          reqPut.setRequestHeader('X-Master-Key', keyAd);
+          reqPut.send(JSON.stringify(data));
+          setSend(false);
+        }
+      };
+      req.open('GET', urlAd, true);
+      req.setRequestHeader('X-Master-Key', keyAd);
+      req.send();
       document.querySelector('.g-recaptcha').disabled = true;
       setTimeout(() => {
         document.querySelector('.g-recaptcha').disabled = false;
-      }, Number(data.directions.timer) || 5000)
+      }, `${data.directions.timer}000` || 1000)
 		}
 	}, [send, data]);
 	const changeInputs = ({ param, name }) => {

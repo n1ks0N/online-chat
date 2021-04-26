@@ -8,7 +8,8 @@ const InputText = ({
 	placeholder,
 	change,
 	i,
-	tag
+	tag,
+	max
 }) => {
 	const inputRef = useRef(value);
 	const record = () => {
@@ -31,6 +32,7 @@ const InputText = ({
 						ref={inputRef}
 						value={value}
 						onChange={record}
+						maxLength={max}
 					/>
 				) : (
 					<input

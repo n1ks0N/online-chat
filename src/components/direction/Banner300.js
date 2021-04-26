@@ -122,12 +122,27 @@ const Banner300 = ({ type }) => {
 	useEffect(() => {
 		if (send) {
 			let req = new XMLHttpRequest();
-			req.open('PUT', urlAd, true);
-			req.setRequestHeader('Content-Type', 'application/json');
-			req.setRequestHeader('X-Master-Key', keyAd);
-			req.send(JSON.stringify(data));
-			setSend(false);
-			setCount(7);
+      req.onreadystatechange = () => {
+        if (req.readyState == XMLHttpRequest.DONE) {
+          let result = JSON.parse(req.responseText).record;
+          let arr = result['directions'][type].slice()
+          if (arr.length >= 20) {
+            arr.pop();
+          }
+          arr.unshift(data.directions[type][0]);
+          result.directions[type] = arr;
+          let reqPut = new XMLHttpRequest();
+          reqPut.open('PUT', urlAd, true);
+          reqPut.setRequestHeader('Content-Type', 'application/json');
+          reqPut.setRequestHeader('X-Master-Key', keyAd);
+          reqPut.send(JSON.stringify(data));
+          setSend(false);
+          setCount(7);
+        }
+      };
+      req.open('GET', urlAd, true);
+      req.setRequestHeader('X-Master-Key', keyAd);
+      req.send();
 		} // eslint-disable-next-line
 	}, [send]);
 

@@ -90,12 +90,27 @@ const Sites = () => {
 	useEffect(() => {
 		if (send) {
 			let req = new XMLHttpRequest();
-			req.open('PUT', urlAd, true);
-			req.setRequestHeader('Content-Type', 'application/json');
-			req.setRequestHeader('X-Master-Key', keyAd);
-			req.send(JSON.stringify(data));
-			setSend(false);
-			setCount(7);
+      req.onreadystatechange = () => {
+        if (req.readyState == XMLHttpRequest.DONE) {
+          let result = JSON.parse(req.responseText).record;
+          let arr = result['directions']['sites'].slice()
+          if (arr.length >= 20) {
+            arr.pop();
+          }
+          arr.unshift(data.directions.sites[0]);
+          result.directions.sites = arr;
+          let reqPut = new XMLHttpRequest();
+          reqPut.open('PUT', urlAd, true);
+          reqPut.setRequestHeader('Content-Type', 'application/json');
+          reqPut.setRequestHeader('X-Master-Key', keyAd);
+          reqPut.send(JSON.stringify(data));
+          setSend(false);
+          setCount(7);
+        }
+      };
+      req.open('GET', urlAd, true);
+      req.setRequestHeader('X-Master-Key', keyAd);
+      req.send();
 		} // eslint-disable-next-line
 	}, [send]);
 
@@ -156,6 +171,7 @@ const Sites = () => {
 									change={changesInput}
 									i="0"
 									tag="textarea"
+                  max="70"
 								/>
 								<InputText
 									text="Ссылка"
@@ -178,8 +194,8 @@ const Sites = () => {
 						</div>
 						<div className="links__wrapper">
 							{!!data &&
-								data.directions.links.map((data, i) => (
-									<div className="links__wrapper__item" key={i}>
+								data.directions.sites.map((data, i) => (
+									<div className="links__wrapper__item links__wrapper_sites_margin" key={i}>
 										<div className="links__wrapper__text">
 											<p className="links__wrapper__a">{data.text}</p>
 											<a

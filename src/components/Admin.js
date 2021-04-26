@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { urlAd, keyAd } from '../constants/api.json';
 import InputText from '../elements/InputText';
 import './Admin.css';
@@ -157,13 +157,13 @@ const Admin = () => {
 		});
 	};
 
-	const changeDirections = ({ param }) => {
+	const changeDirections = ({ param, name }) => {
 		setData((prev) => {
 			return {
 				...prev,
 				['directions']: {
 					...prev['directions'],
-					['timer']: param
+					[name]: param
 				}
 			}
 		})
@@ -171,11 +171,14 @@ const Admin = () => {
 
 	const send = () => {
 		let req = new XMLHttpRequest();
+		let sendData = data;
+		if (Number(data.directions.messages) < data.directions.chat.length) {
+			sendData.directions.chat.splice(0, Number(data.directions.chat.length) - Number(data.directions.messages))
+		}
 		req.open('PUT', urlAd, true);
 		req.setRequestHeader('Content-Type', 'application/json');
 		req.setRequestHeader('X-Master-Key', keyAd);
-		req.send(JSON.stringify(data));
-		console.log(data)
+		req.send(JSON.stringify(sendData));
 	};
 	return (
 		<div className="">
@@ -434,6 +437,16 @@ const Admin = () => {
 						value={data.directions.timer}
 						change={changeDirections}
 						name="timer"
+					/>
+					</div>
+					<h3 align="center">Кол-во сообщений в чате</h3>
+					<div style={{ width: '800px', margin: 'auto' }}>
+					<InputText 
+						text="Кол-во сообщений"
+						type="number"
+						value={data.directions.messages}
+						change={changeDirections}
+						name="messages"
 					/>
 					</div>
 					<center>
